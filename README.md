@@ -55,7 +55,7 @@ The default GCC 4.8 is missing stdatomic.h and fails at multithreading tests whe
 6. make test
 
 ### if all tests pass
-sudo make install
+7. sudo make install
 
 ## Initialize PosgreSQL database
 
