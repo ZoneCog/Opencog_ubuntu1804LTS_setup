@@ -24,7 +24,7 @@ Building OpenCog is a moving target. As of 27th of April 2018, these instruction
 
 ### Install Git
 
-sudo apt-get install git
+1. sudo apt-get install git
 
 ## Get Octool and install all dependencies (https://github.com/opencog/ocpkg)
 
@@ -87,24 +87,24 @@ The default GCC 4.8 is missing stdatomic.h and fails at multithreading tests whe
 2. ALTER USER posrgres with encrypted password 'password';
 
 ### Edit confs
-sudo vim /etc/postgresql/9.3/main/postgresql.conf
+1. sudo vim /etc/postgresql/9.3/main/postgresql.conf
 
-### Enable listening to all addresses
+#### Enable listening to all addresses
 listen_address = '*'
 
 ### User permissions
-sudo vim /etc/postgresql/9.3/main/pg_hba.conf
+1. sudo vim /etc/postgresql/9.3/main/pg_hba.conf
 
-### Main user
+#### Main user
 replace peer with md5:
 local      all     postgres     md5
 
-### Other users
+#### Other users
 host all all 0.0.0.0/0 md5
 
 ### Configure ODBC drivers:
 
-https://github.com/opencog/atomspace/blob/master/opencog/persist/sql/README.md
+1. see: https://github.com/opencog/atomspace/blob/master/opencog/persist/sql/README.md
 
 ### Continue initialization
 
