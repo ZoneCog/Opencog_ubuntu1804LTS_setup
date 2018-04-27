@@ -20,7 +20,7 @@ Building OpenCog is a moving target. As of 27th of April 2018, these instruction
 ### Add the following line to fstab:
 /swapfile none swap sw 0 0
 
-6. check that the swapfile was actually added: cat /proc/meminfo
+6. check that the swapfile was actually added: swapon --show
 
 ### Install Git (only if you use an older Ubuntu)
 
