@@ -22,7 +22,7 @@ Building OpenCog is a moving target. As of 27th of April 2018, these instruction
 
 6. check that the swapfile was actually added: cat /proc/meminfo
 
-### Install Git
+### Install Git (only if you use an older Ubuntu)
 
 1. sudo apt-get install git
 
