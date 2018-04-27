@@ -75,7 +75,64 @@ NOTE: I managed to get this to run on Ubuntu 16.04 LTS as well, but you need to 
 ### if all tests pass
 7. sudo make install
 
-## Initialize PosgreSQL database
+## Initialize PostgreSQL database
+
+### Configure ODBC drivers:
+
+1. sudo vim /etc/odbcinst.ini 
+
+```
+[PostgreSQL Unicode]
+Description = PostgreSQL ODBC driver (Unicode version)
+Driver      = psqlodbcw.so
+Setup       = libodbcpsqlS.so
+Debug       = 0
+CommLog     = 0
+```
+
+1. see: https://github.com/opencog/atomspace/blob/master/opencog/persist/sql/README.md
+
+2. Add the following to ~/.odbc.ini
+
+```
+[mycogdata]
+Description       = My Favorite Database
+Driver            = PostgreSQL Unicode
+CommLog           = No
+Database          = mycogdata
+Servername        = localhost
+Port              = 5432
+Username          = opencog_user
+Password          = cheese
+ReadOnly          = No
+RowVersioning     = No
+ShowSystemTables  = Yes
+ShowOidColumn     = Yes
+FakeOidIndex      = Yes
+ConnSettings      =
+
+
+### Add DB tweaks
+
+I use the following config at the end of /etc/postgresql/10/main/postgresql.conf:
+
+```
+shared_buffers = 256MB
+work_mem = 32MB
+effective_cache_size = 512MB
+synchronous_commit = off
+
+checkpoint_timeout = 1h
+max_wal_size = 4GB
+checkpoint_completion_target = 0.9
+
+# If you have an SSD drive add the following:
+seq_page_cost = 0.1
+random_page_cost = 0.15
+effective_io_concurrency = 5
+```
+
+## Initialize the first user
 
 1. sudo -u postgres psql template1
 2. ALTER USER postgres with encrypted password 'password';
@@ -95,21 +152,6 @@ local      all     postgres     md5
 
 #### Other users
 host all all 0.0.0.0/0 md5
-
-### Configure ODBC drivers:
-
-1. sudo vim /etc/odbcinst.ini 
-
-´´´
-    [PostgreSQL Unicode]
-    Description = PostgreSQL ODBC driver (Unicode version)
-    Driver      = psqlodbcw.so
-    Setup       = libodbcpsqlS.so
-    Debug       = 0
-    CommLog     = 0
-´´´
-
-1. see: https://github.com/opencog/atomspace/blob/master/opencog/persist/sql/README.md
 
 ### Continue initialization
 
