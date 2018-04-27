@@ -84,4 +84,4 @@ sudo pip3 install -U -r /tmp/requirements.txt
 rm requirements.txt
 
 printf '\n \n'
-echo "Prerequisite software installed. We should have everything we need to build OpenCog."
+echo "Prerequisite software installed."
