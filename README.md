@@ -4,8 +4,8 @@ Building OpenCog is a moving target. As of 27th of April 2018, these instruction
 
 ## Get Octool and install all dependencies
 
-git clone https://github.com/opencog/ocpkg.git
-./octool -rdopsicamgbet -l default
+1. git clone https://github.com/opencog/ocpkg.git
+2. ./octool -rdopsicamgbet -l default
 
 ## Update GCC and G++
 
