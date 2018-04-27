@@ -2,6 +2,8 @@
 
 Building OpenCog is a moving target. As of 27th of April 2018, these instructions work on Ubuntu 18.04 LTS.
 
+NOTE: I managed to get this to run on Ubuntu 16.04 LTS as well, but you need to upgrade GCC and G++ up from version 4.8.x. That version has issues with multithreading when building Link-Grammar!
+
 ## Setup Vagrant with Ubuntu 18.04 LTS
 
 1. Install VirtualBox and Vagrant(the method depends on your OS; In Mac OS High Sierra I use Homebrew by calling brew install vagrant)
@@ -9,10 +11,10 @@ Building OpenCog is a moving target. As of 27th of April 2018, these instruction
 3. vagrant up
 4. vagrant ssh
 
-## Add swap to Vagrant (3GB in this example; adjust to your liking)
+## Add swap to Vagrant (8GB in this example; adjust to your liking)
 
 1. cd /
-2. sudo dd if=/dev/zero of=swapfile bs=1M count=3000
+2. sudo dd if=/dev/zero of=swapfile bs=1M count=8000
 3. sudo mkswap swapfile
 4. sudo swapon swapfile
 5. sudo vim etc/fstab
@@ -31,21 +33,24 @@ Building OpenCog is a moving target. As of 27th of April 2018, these instruction
 1. wget http://raw.github.com/opencog/ocpkg/master/ocpkg -O octool && chmod +rx octool && ./octool -h
 2. ./octool -rdopsicamgbet -l default
 
-## Update GCC and G++
+## Install some missing dependencies (some difficulties with binsutils-dev)
 
-The default GCC 4.8 is missing stdatomic.h and fails at multithreading tests when building Link-Grammar. Therefore you should update to GCC 4.9
+1. sudo apt-get purge binutils-dev
+2. sudo apt-get install binutils-dev
+3. sudo apt-get install cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip
+4. sudo pip install nose pytest
+5. sudo pip3 install nose pytest
 
-1. sudo apt-repository ppa: ubuntu-toolchain-r/test
+## Install Oracle Java 8 and set it as default
+1. sudo add-apt-repository ppa:webupd8team/java
 2. sudo apt-get update
-3. sudo apt-get install gcc-4.9 g++-4.9
-4. sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
+3. sudo apt-get install oracle-java8-installer
+4. sudo apt install oracle-java8-set-default
 
-5. Check that you indeed have a proper version: gcc -v
+## Generate all locales (for Link-Grammar)
 
-
-## Install some missing dependencies
-
-1. sudo apt-get install valgrind default-jdk ant sqlite libgtk-3-dev
+1. sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
+2. sudo locale-gen
 
 ## Install Editline
 
@@ -57,17 +62,11 @@ The default GCC 4.8 is missing stdatomic.h and fails at multithreading tests whe
 6. ./configure
 7. make all
 8. sudo make install
-  
-## Generate all locales (for Link-Grammar)
-
-1. sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
-2. sudo locale-gen
 
 ## Get all repositories
 1. git clone https://github.com/opencog/cogutil.git
 2. git clone https://github.com/opencog/moses.git
 3. git clone https://github.com/opencog/atomspace.git
-4. git clone https://github.com/opencog/link-grammar.git
 
 ## Build and install Cogutil
 
