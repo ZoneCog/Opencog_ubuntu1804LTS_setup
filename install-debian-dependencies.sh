@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # NOTE: This file originates from https://github.com/opencog/ocpkg
-# This file only has one missing package removed from the original.
+# This file only has one missing package removed from the original and Python3 support.
 #Script is designed to interactively install opencog dependencies on a clean Debian Jessie environment.
 #Last Edit 5/28/2016 by Noah Bliss. Major edit. Script is now part of a pair.
 #Removed cogutil/atomspace build/install. They are now handled by opencog-installer.sh
@@ -16,6 +16,7 @@
 PACKAGES_TOOLS="
 		git \
 		python-pip \
+		python3-pip \
 		wget \
 		sudo \
 		"
@@ -79,6 +80,7 @@ rm requirements.txt
 sudo easy_install --upgrade pip
 wget https://raw.githubusercontent.com/opencog/opencog/master/opencog/python/requirements.txt
 sudo pip install -U -r /tmp/requirements.txt
+sudo pip3 install -U -r /tmp/requirements.txt
 rm requirements.txt
 
 printf '\n \n'
