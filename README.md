@@ -28,18 +28,13 @@ NOTE: I managed to get this to run on Ubuntu 16.04 LTS as well, but you need to 
 
 1. sudo apt-get install git
 
-## Get Octool and install all dependencies (https://github.com/opencog/ocpkg)
-
-1. wget http://raw.github.com/opencog/ocpkg/master/ocpkg -O octool && chmod +rx octool && ./octool -h
-2. ./octool -rdopsicamgbet -l default
-
 ## Install some missing dependencies (some difficulties with binsutils-dev)
 
 1. sudo apt-get purge binutils-dev
 2. sudo apt-get install binutils-dev
-3. sudo apt-get install cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip
-4. sudo pip install nose pytest
-5. sudo pip3 install nose pytest
+3. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev unixodbc-dev odbc-postgresql
+4. sudo pip install nose pytest Cython
+5. sudo pip3 install nose pytest Cython
 
 ## Install Oracle Java 8 and set it as default
 1. sudo add-apt-repository ppa:webupd8team/java
@@ -82,17 +77,17 @@ NOTE: I managed to get this to run on Ubuntu 16.04 LTS as well, but you need to 
 
 ## Initialize PosgreSQL database
 
-1. sudo -u posrgres psql template1
-2. ALTER USER posrgres with encrypted password 'password';
+1. sudo -u postgres psql template1
+2. ALTER USER postgres with encrypted password 'password';
 
 ### Edit confs
-1. sudo vim /etc/postgresql/9.3/main/postgresql.conf
+1. sudo vim /etc/postgresql/10/main/postgresql.conf
 
 #### Enable listening to all addresses
 listen_address = '*'
 
 ### User permissions
-1. sudo vim /etc/postgresql/9.3/main/pg_hba.conf
+1. sudo vim /etc/postgresql/10/main/pg_hba.conf
 
 #### Main user
 replace peer with md5:
@@ -102,6 +97,17 @@ local      all     postgres     md5
 host all all 0.0.0.0/0 md5
 
 ### Configure ODBC drivers:
+
+1. sudo vim /etc/odbcinst.ini 
+
+´´´
+    [PostgreSQL Unicode]
+    Description = PostgreSQL ODBC driver (Unicode version)
+    Driver      = psqlodbcw.so
+    Setup       = libodbcpsqlS.so
+    Debug       = 0
+    CommLog     = 0
+´´´
 
 1. see: https://github.com/opencog/atomspace/blob/master/opencog/persist/sql/README.md
 
