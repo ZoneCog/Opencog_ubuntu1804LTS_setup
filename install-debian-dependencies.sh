@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 # NOTE: This file originates from https://github.com/opencog/ocpkg
+# This file only has one missing package removed from the original.
 #Script is designed to interactively install opencog dependencies on a clean Debian Jessie environment.
 #Last Edit 5/28/2016 by Noah Bliss. Major edit. Script is now part of a pair.
 #Removed cogutil/atomspace build/install. They are now handled by opencog-installer.sh
@@ -41,7 +42,6 @@ PACKAGES_BUILD="
 		libboost-serialization-dev \
 		libboost-thread-dev \
 		libboost-system-dev \
-		libjson-spirit-dev \
 		libzmq3-dev \
 		libtbb-dev \
 		binutils-dev \
