@@ -1,11 +1,11 @@
 # How to build OpenCog with all dependencies #
 
-Building OpenCog is a moving target. As of 27th of April 2018, these instructions work on Ubuntu 16.04 LTS.
+Building OpenCog is a moving target. As of 27th of April 2018, these instructions work on Ubuntu 18.04 LTS.
 
-## Setup Vagrant with Ubuntu 16.04 LTS
+## Setup Vagrant with Ubuntu 18.04 LTS
 
 1. Install VirtualBox and Vagrant(the method depends on your OS; In Mac OS High Sierra I use Homebrew by calling brew install vagrant)
-2. Init with Ubuntu 16.04 LTS: vagrant init ubuntu/trusty64
+2. Init with Ubuntu 18.04 LTS: vagrant init bento/ubuntu-18.04
 3. vagrant up
 4. vagrant ssh
 
