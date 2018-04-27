@@ -2,9 +2,33 @@
 
 Building OpenCog is a moving target. As of 27th of April 2018, these instructions work on Ubuntu 16.04 LTS.
 
-## Get Octool and install all dependencies
+## Setup Vagrant with Ubuntu 16.04 LTS
 
-1. git clone https://github.com/opencog/ocpkg.git
+1. Install VirtualBox and Vagrant(the method depends on your OS; In Mac OS High Sierra I use Homebrew by calling brew install vagrant)
+2. Init with Ubuntu 16.04 LTS: vagrant init ubuntu/trusty64
+3. vagrant up
+4. vagrant ssh
+
+## Add swap to Vagrant (3GB in this example; adjust to your liking)
+
+1. cd /
+2. sudo dd if=/dev/zero of=swapfile bs=1M count=3000
+3. sudo mkswap swapfile
+4. sudo swapon swapfile
+5. sudo vim etc/fstab
+
+### Add the following line to fstab:
+/swapfile none swap sw 0 0
+
+6. check that the swapfile was actually added: cat /proc/meminfo
+
+### Install Git
+
+sudo apt-get install git
+
+## Get Octool and install all dependencies (https://github.com/opencog/ocpkg)
+
+1. wget http://raw.github.com/opencog/ocpkg/master/ocpkg -O octool && chmod +rx octool && ./octool -h
 2. ./octool -rdopsicamgbet -l default
 
 ## Update GCC and G++
