@@ -32,7 +32,7 @@ NOTE: I managed to get this to run on Ubuntu 16.04 LTS as well, but you need to 
 
 1. sudo apt-get purge binutils-dev
 2. sudo apt-get install binutils-dev
-3. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-contrib libpq-dev pgadmin3 postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev unixodbc-dev odbc-postgresql libgearman-dev
+3. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-contrib libpq-dev pgadmin3 postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev unixodbc-dev odbc-postgresql libgearman-dev liboctomap-dev
 4. sudo pip install nose pytest Cython
 5. sudo pip3 install nose pytest Cython
 
@@ -67,6 +67,7 @@ NOTE: I managed to get this to run on Ubuntu 16.04 LTS as well, but you need to 
 1. git clone https://github.com/opencog/cogutil.git
 2. git clone https://github.com/opencog/moses.git
 3. git clone https://github.com/opencog/atomspace.git
+4. git clone https://github.com/opencog/opencog.git
 
 ## Build and install Cogutil
 
