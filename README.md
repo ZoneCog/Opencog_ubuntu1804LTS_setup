@@ -2,7 +2,9 @@
 
 Building OpenCog is a moving target. As of 27th of April 2018, these instructions work on Ubuntu 18.04 LTS.
 
-NOTE: I managed to get this to run on Ubuntu 16.04 LTS as well, but you need to upgrade GCC and G++ up from version 4.8.x. That version has issues with multithreading when building Link-Grammar!
+NOTE: I encountered an error with Link-Grammar when building OpenCog. Apparently version 5.5 will fix this issue. So this guide does not work in its current state.
+
+NOTE2: Also MOSES CythonTest fails.
 
 ## Setup Vagrant with Ubuntu 18.04 LTS
 
@@ -28,13 +30,12 @@ NOTE: I managed to get this to run on Ubuntu 16.04 LTS as well, but you need to 
 
 1. sudo apt-get install git
 
-## Install some missing dependencies (some difficulties with binsutils-dev)
+## Install some missing dependencies
 
-1. sudo apt-get purge binutils-dev
-2. sudo apt-get install binutils-dev
-3. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-contrib libpq-dev pgadmin3 postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev unixodbc-dev odbc-postgresql libgearman-dev liboctomap-dev
-4. sudo pip install nose pytest Cython
-5. sudo pip3 install nose pytest Cython
+1. sh install-debian-dependencies.sh
+2. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-contrib libpq-dev pgadmin3 postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev unixodbc-dev odbc-postgresql libgearman-dev liboctomap-dev
+3. sudo pip install nose pytest Cython
+4. sudo pip3 install nose pytest Cython
 
 ## Install Oracle Java 8 and set it as default
 1. sudo add-apt-repository ppa:webupd8team/java
