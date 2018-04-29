@@ -6,7 +6,7 @@ NOTE: I encountered an error with Link-Grammar when building OpenCog. Apparently
 
 NOTE2: Also MOSES CythonTest fails.
 
-## Setup Vagrant with Ubuntu 18.04 LTS
+## Setup Vagrant (VirtualBox) with Ubuntu 18.04 LTS
 
 1. Install VirtualBox and Vagrant(the method depends on your OS; In Mac OS High Sierra I use Homebrew by calling brew install vagrant)
 2. Init with Ubuntu 18.04 LTS: vagrant init bento/ubuntu-18.04
@@ -20,6 +20,14 @@ NOTE2: Also MOSES CythonTest fails.
 3. sudo mkswap swapfile
 4. sudo swapon swapfile
 5. sudo vim etc/fstab
+
+## You may also want to add more storage to your Virtual Machine:
+
+1. vagrant halt
+2. Go to the directory where you have your Virtual Box VMs (e.g. in Mac cd ~/VirtualBox VMs/<some_id>)
+3. VBoxManage clonehd ubuntu_something.vmdk ubuntu_something.vdi --format VDI
+4. VBoxManage ubuntu_something.vdi --resize 51200 (50 GB)
+5. Go to VirtualBox, unmount and delete the old .vmdk and mount the newly created .vdi.
 
 ### Add the following line to fstab:
 /swapfile none swap sw 0 0
