@@ -18,8 +18,14 @@ NOTE2: Also MOSES CythonTest fails.
 1. cd /
 2. sudo dd if=/dev/zero of=swapfile bs=1M count=8000
 3. sudo mkswap swapfile
-4. sudo swapon swapfile
-5. sudo vim etc/fstab
+4. sudo chmod 600 swapfile
+5. sudo swapon swapfile
+6. sudo vim etc/fstab
+
+### Add the following line to fstab:
+/swapfile none swap sw 0 0
+
+7. check that the swapfile was actually added: swapon --show
 
 ## You may also want to add more storage to your Virtual Machine:
 
@@ -29,18 +35,9 @@ NOTE2: Also MOSES CythonTest fails.
 4. VBoxManage ubuntu_something.vdi --resize 51200 (50 GB)
 5. Go to VirtualBox, unmount and delete the old .vmdk and mount the newly created .vdi.
 
-### Add the following line to fstab:
-/swapfile none swap sw 0 0
+### Install dependencies
 
-6. check that the swapfile was actually added: swapon --show
-
-### Install Git (only if you use an older Ubuntu)
-
-1. sudo apt-get install git
-
-## Install some missing dependencies
-
-1. sh install-debian-dependencies.sh
+1. bash install-debian-dependencies.sh
 2. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-contrib libpq-dev pgadmin3 postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev unixodbc-dev odbc-postgresql libgearman-dev liboctomap-dev
 3. sudo pip install nose pytest Cython
 4. sudo pip3 install nose pytest Cython
