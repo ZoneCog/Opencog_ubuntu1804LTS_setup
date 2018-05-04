@@ -17,8 +17,8 @@ NOTE2: Also MOSES CythonTest fails.
 
 1. cd /
 2. sudo dd if=/dev/zero of=swapfile bs=1M count=8000
-3. sudo mkswap swapfile
-4. sudo chmod 600 swapfile
+3. sudo chmod 600 swapfile
+4. sudo mkswap swapfile
 5. sudo swapon swapfile
 6. sudo vim etc/fstab
 
