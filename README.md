@@ -1,6 +1,6 @@
 # How to build OpenCog with all dependencies #
 
-Building OpenCog is a moving target. As of 27th of April 2018, these instructions work on Ubuntu 18.04 LTS.
+Building OpenCog is a moving target. As of 4th of May 2018, these instructions work on Ubuntu 18.04 LTS.
 
 NOTE: I encountered an error with Link-Grammar when building OpenCog. Apparently version 5.5 will fix this issue. So this guide does not work in its current state.
 
@@ -183,6 +183,7 @@ replace peer with md5:
 local      all     postgres     md5
 
 #### Other users
+local all all   md5
 host all all 0.0.0.0/0 md5
 
 ### Continue initialization
@@ -203,17 +204,22 @@ host all all 0.0.0.0/0 md5
 
 ### Add tables to databases
 1. cd atomspace
-2. sudo cat opencog/persist/sql/multi-driver/atom.sql | psql mycogdata -U opencog_user -W -h localhost
-3. sudo cat opencog/persist/sql/multi-driver/atom.sql | psql opencog_test -U opencog_tester -W -h localhost
+2. cat opencog/persist/sql/multi-driver/atom.sql | psql mycogdata -U opencog_user -W -h localhost
+3. cat opencog/persist/sql/multi-driver/atom.sql | psql opencog_test -U opencog_tester -W -h localhost
 
 ### Test that DB works
-1. psql mycogdata
+1. psql mycogdata -U opencog_user
 2. INSERT INTO TypeCodes (type, typename) VALUES (97, 'SemanticRelationNode');
+3. \q
+4. psql opencog_test -U opencog_tester
+5. INSERT INTO TypeCodes (type, typename) VALUES (97, 'SemanticRelationNode');
 
-This should display:
+Both should display:
 ```
 INSERT 0 1
 ```
+NOTE: Also check that all tables in both databases are owned by their intended users by using \l
+
 
 ## Build and install Atomspace
 
