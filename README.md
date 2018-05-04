@@ -140,6 +140,24 @@ ShowSystemTables  = Yes
 ShowOidColumn     = Yes
 FakeOidIndex      = Yes
 ConnSettings      =
+
+[opencog_tester]
+Description = Unit-Test DB for Opencog unit tests.
+Driver      = PostgreSQL Unicode
+Trace       = 0
+TraceFile   =
+CommLog     = No
+Database    = opencog_test
+Servername  = localhost
+Port        = 5432
+Username    = opencog_tester
+Password    = cheese
+ReadOnly    = No
+RowVersioning     = No
+ShowSystemTables  = Yes
+ShowOidColumn     = Yes
+FakeOidIndex      = Yes
+ConnSettings      =
 ```
 
 ### Add DB tweaks
@@ -196,16 +214,19 @@ host all all 0.0.0.0/0 md5
 
 1. sudo -u postgres createdb mycogdata
 2. sudo -u postgres createdb opencog_test
+3. sudo -u postgres createdb opencog_tester
 
 ### Login to PostgreSQL (psql -U postgres) and give permissions
 
-1. GRANT ALL privileges on database mycogdata to opencog_user;
-2. GRANT ALL privileges on database opencog_test to opencog_tester;
+1. GRANT ALL privileges ON DATABASE mycogdata to opencog_user;
+2. GRANT ALL privileges ON DATABASE opencog_test to opencog_tester;
+3. GRANT ALL privileges ON DATABASE opencog_tester to opencog_tester;
 
 ### Add tables to databases
 1. cd atomspace
 2. cat opencog/persist/sql/multi-driver/atom.sql | psql mycogdata -U opencog_user -W -h localhost
 3. cat opencog/persist/sql/multi-driver/atom.sql | psql opencog_test -U opencog_tester -W -h localhost
+4. cat opencog/persist/sql/multi-driver/atom.sql | psql opencog_tester -U opencog_tester -W -h localhost
 
 ### Test that DB works
 1. psql mycogdata -U opencog_user
@@ -213,8 +234,11 @@ host all all 0.0.0.0/0 md5
 3. \q
 4. psql opencog_test -U opencog_tester
 5. INSERT INTO TypeCodes (type, typename) VALUES (97, 'SemanticRelationNode');
+6. \q
+7. psql opencog_tester -U opencog_tester
+8. INSERT INTO TypeCodes (type, typename) VALUES (97, 'SemanticRelationNode');
 
-Both should display:
+All should display:
 ```
 INSERT 0 1
 ```
@@ -230,7 +254,7 @@ NOTE: Also check that all tables in both databases are owned by their intended u
 5. make
 6. make test
 
-### NOTE: the following tests will fail: PutLinkUTest, AttentionUTest
+### NOTE: the following tests will fail: PutLinkUTest
 
 7. sudo make install
 
