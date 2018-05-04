@@ -43,6 +43,7 @@ NOTE2: Also MOSES CythonTest fails.
 4. pip install nose pytest Cython
 5. sudo pip3 install nose pytest Cython
 6. pip3 install nose pytest Cython
+7. sudo easy_install cython nose
 
 ## Install Oracle Java 8 and set it as default
 1. sudo add-apt-repository ppa:webupd8team/java
@@ -203,8 +204,7 @@ NOTE: Also check that all tables in both databases are owned by their intended u
 ## Get, build and install Link-Grammar
 
 1. See https://github.com/opencog/link-grammar and get the tarball or git clone
-
-2. ./configure --enable-widec
+2. ./configure
 3. make
 4. make check
 
