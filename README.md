@@ -39,11 +39,7 @@ NOTE2: Also MOSES CythonTest fails.
 
 1. bash install-debian-dependencies.sh
 2. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-contrib libpq-dev pgadmin3 postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev libgearman-dev liboctomap-dev libncurses5-dev
-3. sudo pip install nose pytest Cython
-4. pip install nose pytest Cython
-5. sudo pip3 install nose pytest Cython
-6. pip3 install nose pytest Cython
-7. sudo easy_install cython nose
+3. sudo easy_install cython nose
 
 ## Install Oracle Java 8 and set it as default
 1. sudo add-apt-repository ppa:webupd8team/java
