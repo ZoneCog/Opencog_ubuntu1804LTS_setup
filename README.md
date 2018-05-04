@@ -30,7 +30,7 @@ NOTE2: Also MOSES CythonTest fails.
 ## You may also want to add more storage to your Virtual Machine (depends on your VirtualBox environment):
 
 1. vagrant halt
-2. Go to the directory where you have your Virtual Box VMs (e.g. in Mac cd ~/VirtualBox VMs/<some_id>)
+2. Go to the directory where you have your Virtual Box VMs (e.g. in Mac cd ~/VirtualBox VMs/some_id)
 3. VBoxManage clonehd ubuntu_something.vmdk ubuntu_something.vdi --format VDI
 4. VBoxManage ubuntu_something.vdi --resize 51200 (50 GB)
 5. Go to VirtualBox, unmount and delete the old .vmdk and mount the newly created .vdi.
@@ -63,7 +63,7 @@ NOTE2: Also MOSES CythonTest fails.
 ## Be sure not to have any ODBC drivers installed.
 
 1. dpkg --get-selections | grep odbc
-2. sudo apt-get purge <any package>
+2. sudo apt-get purge [package]
 
 ## Install Editline
 
