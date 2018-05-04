@@ -144,10 +144,12 @@ random_page_cost = 0.15
 effective_io_concurrency = 5
 ```
 
-## Initialize the first user
+## Initialize the first users (note: replace vagrant with your username if you are not using Vagrant).
 
 1. sudo -u postgres psql template1
 2. ALTER USER postgres with encrypted password 'password';
+3. CREATE ROLE vagrant WITH SUPERUSER;
+4. ALTER ROLE vagrant WITH LOGIN;
 
 ### Edit confs
 1. sudo vim /etc/postgresql/10/main/postgresql.conf
@@ -185,6 +187,15 @@ host all all 0.0.0.0/0 md5
 1. cd atomspace
 2. sudo cat opencog/persist/sql/multi-driver/atom.sql | psql mycogdata -U opencog_user -W -h localhost
 3. sudo cat opencog/persist/sql/multi-driver/atom.sql | psql opencog_test -U opencog_tester -W -h localhost
+
+### Test that DB works
+1. psql mycogdata
+2. INSERT INTO TypeCodes (type, typename) VALUES (97, 'SemanticRelationNode');
+
+This should display:
+```
+INSERT 0 1
+```
 
 ## Build and install Atomspace
 
