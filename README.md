@@ -38,8 +38,7 @@ NOTE2: Also MOSES CythonTest fails.
 ### Install dependencies
 
 1. bash install-debian-dependencies.sh
-2. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-contrib libpq-dev pgadmin3 postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev libgearman-dev liboctomap-dev libncurses5-dev
-3. sudo easy_install cython nose
+2. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-contrib libpq-dev pgadmin3 postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev libgearman-dev liboctomap-dev libncurses5-dev cython python-nose
 
 ## Install Oracle Java 8 and set it as default
 1. sudo add-apt-repository ppa:webupd8team/java
@@ -177,14 +176,9 @@ NOTE: Also check that all tables in both databases are owned by their intended u
 1. cd atomspace
 2. mkdir build
 3. cd build
-4. Add the following to your ~/.bash_profile:
-```
-export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:~/src/moses/build/moses/cython
-```
-5. source ~/.bash_profile
-6. cmake ..
-7. make
-8. make test
+4. cmake ..
+5. make
+6. make test
 
 ### NOTE: the following tests will fail: PutLinkUTest
 
@@ -195,12 +189,17 @@ export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:~/src/moses/build/mo
 1. cd moses
 2. mkdir build
 3. cd build
-4. cmake -DCMAKE_BUILD_TYPE=Release ..
-5. make
-6. make test
+4. Add the following to your ~/.bash_profile:
+```
+export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:~/src/moses/build/moses/cython
+```
+5. source ~/.bash_profile
+6. cmake -DCMAKE_BUILD_TYPE=Release ..
+7. make
+8. make test
 
 ### if all tests pass:
-7. sudo make install
+9. sudo make install
 
 ## Get, build and install Link-Grammar
 
