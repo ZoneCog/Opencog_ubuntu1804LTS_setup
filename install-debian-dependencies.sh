@@ -61,8 +61,6 @@ PACKAGES_BUILD="
 
 # Packages required for integrating opencog with other services
 PACKAGES_RUNTIME="
-		unixodbc \
-		odbc-postgresql \
 		postgresql-client \
 		"
 
