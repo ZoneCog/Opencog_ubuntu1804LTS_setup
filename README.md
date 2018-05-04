@@ -177,9 +177,14 @@ NOTE: Also check that all tables in both databases are owned by their intended u
 1. cd atomspace
 2. mkdir build
 3. cd build
-4. cmake ..
-5. make
-6. make test
+4. Add the following to your ~/.bash_profile:
+```
+export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:~/src/moses/build/moses/cython
+```
+5. source ~/.bash_profile
+6. cmake ..
+7. make
+8. make test
 
 ### NOTE: the following tests will fail: PutLinkUTest
 
@@ -196,11 +201,6 @@ NOTE: Also check that all tables in both databases are owned by their intended u
 
 ### if all tests pass:
 7. sudo make install
-8. Add the following to your ~/.bash_profile:
-
-```
-export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:~/src/moses/build/moses/cython
-```
 
 ## Get, build and install Link-Grammar
 
