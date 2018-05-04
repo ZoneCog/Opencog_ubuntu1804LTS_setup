@@ -122,6 +122,24 @@ ShowSystemTables  = Yes
 ShowOidColumn     = Yes
 FakeOidIndex      = Yes
 ConnSettings      =
+
+[opencog_test]
+Description = Unit-Test DB for Opencog unit tests.
+Driver      = PostgreSQL Unicode
+Trace       = 0
+TraceFile   =
+CommLog     = No
+Database    = opencog_test
+Servername  = localhost
+Port        = 5432
+Username    = opencog_tester
+Password    = cheese
+ReadOnly    = No
+RowVersioning     = No
+ShowSystemTables  = Yes
+ShowOidColumn     = Yes
+FakeOidIndex      = Yes
+ConnSettings      =
 ```
 
 ### Add DB tweaks
