@@ -200,6 +200,11 @@ NOTE: Also check that all tables in both databases are owned by their intended u
 
 ### if all tests pass:
 7. sudo make install
+8. Add the following to your ~/.bash_profile:
+
+```
+export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:~/src/moses/build/moses/cython
+```
 
 ## Get, build and install Link-Grammar
 
