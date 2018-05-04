@@ -27,7 +27,7 @@ NOTE2: Also MOSES CythonTest fails.
 
 7. check that the swapfile was actually added: swapon --show
 
-## You may also want to add more storage to your Virtual Machine:
+## You may also want to add more storage to your Virtual Machine (depends on your VirtualBox environment):
 
 1. vagrant halt
 2. Go to the directory where you have your Virtual Box VMs (e.g. in Mac cd ~/VirtualBox VMs/<some_id>)
@@ -38,9 +38,11 @@ NOTE2: Also MOSES CythonTest fails.
 ### Install dependencies
 
 1. bash install-debian-dependencies.sh
-2. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-contrib libpq-dev pgadmin3 postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev unixodbc-dev odbc-postgresql libgearman-dev liboctomap-dev
+2. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-contrib libpq-dev pgadmin3 postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev unixodbc-dev odbc-postgresql libgearman-dev liboctomap-dev libncurses5-dev
 3. sudo pip install nose pytest Cython
-4. sudo pip3 install nose pytest Cython
+4. pip install nose pytest Cython
+5. sudo pip3 install nose pytest Cython
+6. pip3 install nose pytest Cython
 
 ## Install Oracle Java 8 and set it as default
 1. sudo add-apt-repository ppa:webupd8team/java
