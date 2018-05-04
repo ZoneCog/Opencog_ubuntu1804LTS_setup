@@ -38,7 +38,7 @@ NOTE2: Also MOSES CythonTest fails.
 ### Install dependencies
 
 1. bash install-debian-dependencies.sh
-2. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-contrib libpq-dev pgadmin3 postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev unixodbc-dev odbc-postgresql libgearman-dev liboctomap-dev libncurses5-dev
+2. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-contrib libpq-dev pgadmin3 postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev libgearman-dev liboctomap-dev libncurses5-dev
 3. sudo pip install nose pytest Cython
 4. pip install nose pytest Cython
 5. sudo pip3 install nose pytest Cython
@@ -90,77 +90,6 @@ NOTE2: Also MOSES CythonTest fails.
 7. sudo make install
 
 ## Initialize PostgreSQL database
-
-### Configure ODBC drivers:
-
-1. sudo vim /etc/odbcinst.ini 
-
-```
-[PostgreSQL Unicode]
-Description = PostgreSQL ODBC driver (Unicode version)
-Driver      = psqlodbcw.so
-Setup       = libodbcpsqlS.so
-Debug       = 0
-CommLog     = 0
-```
-
-1. see: https://github.com/opencog/atomspace/blob/master/opencog/persist/sql/README.md
-
-2. Add the following to ~/.odbc.ini
-
-```
-[mycogdata]
-Description       = My Favorite Database
-Driver            = PostgreSQL Unicode
-CommLog           = No
-Database          = mycogdata
-Servername        = localhost
-Port              = 5432
-Username          = opencog_user
-Password          = cheese
-ReadOnly          = No
-RowVersioning     = No
-ShowSystemTables  = Yes
-ShowOidColumn     = Yes
-FakeOidIndex      = Yes
-ConnSettings      =
-
-[opencog_test]
-Description = Unit-Test DB for Opencog unit tests.
-Driver      = PostgreSQL Unicode
-Trace       = 0
-TraceFile   =
-CommLog     = No
-Database    = opencog_test
-Servername  = localhost
-Port        = 5432
-Username    = opencog_tester
-Password    = cheese
-ReadOnly    = No
-RowVersioning     = No
-ShowSystemTables  = Yes
-ShowOidColumn     = Yes
-FakeOidIndex      = Yes
-ConnSettings      =
-
-[opencog_tester]
-Description = Unit-Test DB for Opencog unit tests.
-Driver      = PostgreSQL Unicode
-Trace       = 0
-TraceFile   =
-CommLog     = No
-Database    = opencog_test
-Servername  = localhost
-Port        = 5432
-Username    = opencog_tester
-Password    = cheese
-ReadOnly    = No
-RowVersioning     = No
-ShowSystemTables  = Yes
-ShowOidColumn     = Yes
-FakeOidIndex      = Yes
-ConnSettings      =
-```
 
 ### Add DB tweaks
 
@@ -216,19 +145,16 @@ host all all 0.0.0.0/0 md5
 
 1. sudo -u postgres createdb mycogdata
 2. sudo -u postgres createdb opencog_test
-3. sudo -u postgres createdb opencog_tester
 
 ### Login to PostgreSQL (psql -U postgres) and give permissions
 
 1. GRANT ALL privileges ON DATABASE mycogdata to opencog_user;
 2. GRANT ALL privileges ON DATABASE opencog_test to opencog_tester;
-3. GRANT ALL privileges ON DATABASE opencog_tester to opencog_tester;
 
 ### Add tables to databases
 1. cd atomspace
 2. cat opencog/persist/sql/multi-driver/atom.sql | psql mycogdata -U opencog_user -W -h localhost
 3. cat opencog/persist/sql/multi-driver/atom.sql | psql opencog_test -U opencog_tester -W -h localhost
-4. cat opencog/persist/sql/multi-driver/atom.sql | psql opencog_tester -U opencog_tester -W -h localhost
 
 ### Test that DB works
 1. psql mycogdata -U opencog_user
@@ -236,11 +162,8 @@ host all all 0.0.0.0/0 md5
 3. \q
 4. psql opencog_test -U opencog_tester
 5. INSERT INTO TypeCodes (type, typename) VALUES (97, 'SemanticRelationNode');
-6. \q
-7. psql opencog_tester -U opencog_tester
-8. INSERT INTO TypeCodes (type, typename) VALUES (97, 'SemanticRelationNode');
 
-All should display:
+Both should display:
 ```
 INSERT 0 1
 ```
