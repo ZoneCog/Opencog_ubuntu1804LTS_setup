@@ -60,6 +60,11 @@ NOTE2: Also MOSES CythonTest fails.
 1. sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
 2. sudo locale-gen
 
+## Be sure not to have any ODBC drivers installed.
+
+1. dpkg --get-selections | grep odbc
+2. sudo apt-get purge <any package>
+
 ## Install Editline
 
 1. Go to http://thrysoee.dk/editline/
