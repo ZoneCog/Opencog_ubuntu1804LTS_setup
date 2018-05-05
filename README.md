@@ -191,7 +191,7 @@ NOTE: Also check that all tables in both databases are owned by their intended u
 3. cd build
 4. Add the following to your ~/.bash_profile:
 ```
-export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:~/src/moses/build/moses/cython
+export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:~/src/moses/build/moses/cython:~/moses/build/moses/cython
 ```
 5. source ~/.bash_profile
 6. cmake -DCMAKE_BUILD_TYPE=Release ..
