@@ -39,7 +39,7 @@ NOTE2: Also MOSES CythonTest fails.
 
 1. Get Octool by following the guide here: https://github.com/opencog/ocpkg
 2. ./octool -rdpcav -l default
-3. sudo apt-get install gcc g++ make cmake libboost-all-dev cython python-nose python3-nose python-pytest python3-pytest postgresql postgresql-contrib postgresql-client
+3. sudo apt-get install gcc g++ make cmake libboost-all-dev cython python-nose python3-nose python-pytest python3-pytest postgresql postgresql-contrib postgresql-client guile-2.2-dev
 
 ## Install Oracle Java 8 and set it as default
 1. sudo add-apt-repository ppa:webupd8team/java
