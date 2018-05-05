@@ -35,10 +35,11 @@ NOTE2: Also MOSES CythonTest fails.
 4. VBoxManage ubuntu_something.vdi --resize 51200 (50 GB)
 5. Go to VirtualBox, unmount and delete the old .vmdk and mount the newly created .vdi.
 
-### Install dependencies
+## Install dependencies
 
-1. bash install-debian-dependencies.sh
-2. sudo apt-get install gcc g++ make cmake libboost-all-dev cxxtest libiberty-dev doxygen valgrind default-jdk ant sqlite libopenmpi-dev postgresql postgresql-contrib libpq-dev pgadmin3 postgresql-client libgtk-3-dev swig m4 autoconf autoconf-archive flex graphviz hunspell sqlite3 aspell clang cython python-pip python3-pip guile-2.0-dev libzmq3-dev libprotobuf-dev libgearman-dev liboctomap-dev libncurses5-dev cython python-nose
+1. Get Octool by following the guide here: https://github.com/opencog/ocpkg
+2. ./octool -rdpcav -l default
+3. sudo apt-get install gcc g++ make cmake libboost-all-dev cython python-nose python3-nose python-pytest python3-pytest postgresql postgresql-contrib postgresql-client
 
 ## Install Oracle Java 8 and set it as default
 1. sudo add-apt-repository ppa:webupd8team/java
@@ -46,31 +47,10 @@ NOTE2: Also MOSES CythonTest fails.
 3. sudo apt-get install oracle-java8-installer
 4. sudo apt install oracle-java8-set-default
 
-## Install GHC (Haskell)
-1. sudo add-apt-repository ppa:hvr/ghc
-2. sudo apt-get update
-3. sudo apt-get install ghc
-
 ## Generate all locales (for Link-Grammar)
 
 1. sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
 2. sudo locale-gen
-
-## Be sure not to have any ODBC drivers installed.
-
-1. dpkg --get-selections | grep odbc
-2. sudo apt-get purge [package]
-
-## Install Editline
-
-1. Go to http://thrysoee.dk/editline/
-2. Get the link to the latest version and download it: wget <link>
-3. tar -xvf <tarball>
-4. sudo apt-get install libncurses5-dev
-5. cd libeditline
-6. ./configure
-7. make all
-8. sudo make install
 
 ## Get all repositories
 1. git clone https://github.com/opencog/cogutil.git
@@ -89,6 +69,38 @@ NOTE2: Also MOSES CythonTest fails.
 
 ### if all tests pass
 7. sudo make install
+
+
+## Build and install MOSES
+
+1. cd moses
+2. mkdir build
+3. cd build
+4. Add the following to your ~/.bash_profile:
+```
+export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:~/src/moses/build/moses/cython:~/moses/build/moses/cython
+```
+5. source ~/.bash_profile
+6. cmake -DCMAKE_BUILD_TYPE=Release ..
+7. make
+8. make test
+
+### if all tests pass:
+9. sudo make install
+
+## Get, build and install Link-Grammar
+
+1. See https://github.com/opencog/link-grammar and get the tarball or git clone
+2. ./configure
+3. make
+4. make check
+
+### if all tests pass:
+5. sudo su
+6. make install
+7. ldconfig
+8. exit
+9. make installcheck
 
 ## Initialize PostgreSQL database
 
@@ -183,37 +195,6 @@ NOTE: Also check that all tables in both databases are owned by their intended u
 ### NOTE: the following tests will fail: PutLinkUTest
 
 7. sudo make install
-
-## Build and install MOSES
-
-1. cd moses
-2. mkdir build
-3. cd build
-4. Add the following to your ~/.bash_profile:
-```
-export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:~/src/moses/build/moses/cython:~/moses/build/moses/cython
-```
-5. source ~/.bash_profile
-6. cmake -DCMAKE_BUILD_TYPE=Release ..
-7. make
-8. make test
-
-### if all tests pass:
-9. sudo make install
-
-## Get, build and install Link-Grammar
-
-1. See https://github.com/opencog/link-grammar and get the tarball or git clone
-2. ./configure
-3. make
-4. make check
-
-### if all tests pass:
-5. sudo su
-6. make install
-7. ldconfig
-8. exit
-9. make installcheck
 
 ## Build and install OpenCog
 
