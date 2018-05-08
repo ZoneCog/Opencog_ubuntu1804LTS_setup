@@ -37,17 +37,20 @@ Building OpenCog is a moving target. As of 8th of May 2018, these instructions w
 2. sudo apt-get update
 3. sudo pip install -U setuptools
 4. sudo easy_install cython nose
-5. Get Octool by following the guide here: https://github.com/opencog/ocpkg
-6. ./octool -rdospicamgvbe -l default -l java
-
+5. sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
+6. sudo locale-gen
+7. Get Octool by following the guide here: https://github.com/opencog/ocpkg
+8. ./octool -rdospicamgvbe -l default -l java
 
 ## Update PYTHONPATH
 
-1. Add the following to your ~/.bash_profile
+1. Check where your link-grammar exists (most likely in /usr/local/lib/python3.6/site-packages/link-grammar)
+2. Add the following to your ~/.bash_profile
 
 ```
-export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:/usr//local/lib/python3.5/dist-packages/ 
+export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python/:/usr//local/lib/python3.5/dist-packages/:/usr/local/lib/python3.5/site-packages/:/usr//local/lib/python3.6/dist-packages/:/usr/local/lib/python3.6/site-packages/link-grammar/
 ```
+2. source ~/.bash_profile
 
 NOTE: You need to check where atomspace actually is. You can do it by running `find /usr |grep opencog |grep python`
 
@@ -58,7 +61,7 @@ NOTE: You need to check where atomspace actually is. You can do it by running `f
 ```
 (add-to-load-path "/usr/local/share/opencog/scm")
 (add-to-load-path ".")
-
+```
 
 ## Initialize PostgreSQL database
 
@@ -161,3 +164,19 @@ NOTE: Also check that all tables in both databases are owned by their intended u
 
 ### Some tests will fail:
 7. sudo make install
+
+## Install Relex
+
+1. git clone https://github.com/opencog/relex
+2. cd relex
+3. install-scripts/install-ubuntu-dependencies.sh
+
+## How to run e.g. chatbot
+
+1. Open another terminal window and log in: `vagrant ssh`
+2. cd relex
+3. bash opencog_server.sh
+4. Go back to your original window and go to opencog build directory: `cd ~/opencog/build`
+5. `guile -l ../opencog/nlp/chatbot/run-chatbot.scm`
+6. You can post a question using guile, e.g.: `(process-query "luser" "Are you a bot?")`
+6. For more examples see: https://github.com/opencog/opencog/tree/master/opencog/nlp/chatbot
