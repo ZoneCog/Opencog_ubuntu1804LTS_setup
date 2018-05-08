@@ -44,11 +44,21 @@ Building OpenCog is a moving target. As of 8th of May 2018, these instructions w
 ## Update PYTHONPATH
 
 1. Add the following to your ~/.bash_profile
+
 ```
 export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:/usr//local/lib/python3.5/dist-packages/ 
 ```
 
 NOTE: You need to check where atomspace actually is. You can do it by running `find /usr |grep opencog |grep python`
+
+## Update Guile paths
+
+1. Add the following to ~/.guile
+
+```
+(add-to-load-path "/usr/local/share/opencog/scm")
+(add-to-load-path ".")
+
 
 ## Initialize PostgreSQL database
 
