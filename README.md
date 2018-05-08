@@ -38,15 +38,17 @@ Building OpenCog is a moving target. As of 8th of May 2018, these instructions w
 3. sudo pip install -U setuptools
 4. sudo easy_install cython nose
 5. Get Octool by following the guide here: https://github.com/opencog/ocpkg
-6. ./octool -rdospicamgv -l default -l java
+6. ./octool -rdospicamgvbe -l default -l java
 
 
 ## Update PYTHONPATH
 
 1. Add the following to your ~/.bash_profile
 ```
-export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:~/src/moses/build/moses/cython:~/moses/build/moses/cython
+export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:/usr//local/lib/python3.5/dist-packages/ 
 ```
+
+NOTE: You need to check where atomspace actually is. You can do it by running `find /usr |grep opencog |grep python`
 
 ## Initialize PostgreSQL database
 
@@ -58,11 +60,11 @@ I use the following config at the end of /etc/postgresql/10/main/postgresql.conf
 shared_buffers = 256MB
 work_mem = 32MB
 effective_cache_size = 512MB
+fsync = off
 synchronous_commit = off
-
-checkpoint_timeout = 1h
-max_wal_size = 4GB
-checkpoint_completion_target = 0.9
+ssl = off
+autovacuum = on
+track_counts = on
 
 # If you have an SSD drive add the following:
 seq_page_cost = 0.1
@@ -76,12 +78,21 @@ effective_io_concurrency = 5
 2. ALTER USER postgres with encrypted password 'password';
 3. CREATE ROLE vagrant WITH SUPERUSER;
 4. ALTER ROLE vagrant WITH LOGIN;
+5. \q
 
 ### Edit confs
 1. sudo vim /etc/postgresql/10/main/postgresql.conf
 
 #### Enable listening to all addresses
 listen_address = '*'
+
+#### sysctl.conf
+1. sudo vim /etc/sysctl.conf
+2. Add the following:
+
+```
+kernel.shmmax = 6440100100
+```
 
 ### User permissions
 1. sudo vim /etc/postgresql/10/main/pg_hba.conf
@@ -111,9 +122,10 @@ host all all 0.0.0.0/0 md5
 2. GRANT ALL privileges ON DATABASE opencog_test to opencog_tester;
 
 ### Add tables to databases
-1. cd atomspace
-2. cat opencog/persist/sql/multi-driver/atom.sql | psql mycogdata -U opencog_user -W -h localhost
-3. cat opencog/persist/sql/multi-driver/atom.sql | psql opencog_test -U opencog_tester -W -h localhost
+1. git clone https://github.com/opencog/atomspace.git
+2. cd atomspace
+3. cat opencog/persist/sql/multi-driver/atom.sql | psql mycogdata -U opencog_user -W -h localhost
+4. cat opencog/persist/sql/multi-driver/atom.sql | psql opencog_test -U opencog_tester -W -h localhost
 
 ### Test that DB works
 1. psql mycogdata -U opencog_user
