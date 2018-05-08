@@ -165,7 +165,7 @@ NOTE: Also check that all tables in both databases are owned by their intended u
 ### Some tests will fail:
 7. sudo make install
 
-## Install Relex
+## Install RelEx
 
 1. git clone https://github.com/opencog/relex
 2. cd relex
