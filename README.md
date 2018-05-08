@@ -1,10 +1,6 @@
 # How to build OpenCog with all dependencies #
 
-Building OpenCog is a moving target. As of 4th of May 2018, these instructions work on Ubuntu 18.04 LTS.
-
-NOTE: I encountered an error with Link-Grammar when building OpenCog. Apparently version 5.5 will fix this issue. So this guide does not work in its current state.
-
-NOTE2: Also MOSES CythonTest fails.
+Building OpenCog is a moving target. As of 8th of May 2018, these instructions work on Ubuntu 18.04 LTS.
 
 ## Setup Vagrant (VirtualBox) with Ubuntu 18.04 LTS
 
@@ -37,70 +33,20 @@ NOTE2: Also MOSES CythonTest fails.
 
 ## Install dependencies
 
-1. Get Octool by following the guide here: https://github.com/opencog/ocpkg
-2. ./octool -rdpcav -l default
-3. sudo apt-get install gcc g++ make cmake libboost-all-dev cython python-nose python3-nose python-pytest python3-pytest postgresql postgresql-contrib postgresql-client guile-2.2-dev
-
-## Install Oracle Java 8 and set it as default
-1. sudo add-apt-repository ppa:webupd8team/java
+1. sudo apt-get install gcc g++ make cmake libboost-all-dev cython python-nose python3-nose python-pytest python3-pytest postgresql postgresql-contrib postgresql-client guile-2.2-dev libtbb-dev libgearman-dev libpq-dev python-pip libblas-dev liblapack-dev uuid-dev doxygen libiberty-dev binutils-dev valgrind postgresql postgresql-client postgresql-contrib libpq-dev liblogging-stdlog0 liblogger-syslog-perl libzmq3-dev libprotobuf-dev libgtk-3-dev default-jdk python-cffi libffi-dev
 2. sudo apt-get update
-3. sudo apt-get install oracle-java8-installer
-4. sudo apt install oracle-java8-set-default
-
-## Generate all locales (for Link-Grammar)
-
-1. sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
-2. sudo locale-gen
-
-## Get all repositories
-1. git clone https://github.com/opencog/cogutil.git
-2. git clone https://github.com/opencog/moses.git
-3. git clone https://github.com/opencog/atomspace.git
-4. git clone https://github.com/opencog/opencog.git
-
-## Build and install Cogutil
-
-1. cd cogutil
-2. mkdir build
-3. cd build
-4. cmake ..
-5. make
-6. make test
-
-### if all tests pass
-7. sudo make install
+3. sudo pip install -U setuptools
+4. sudo easy_install cython nose
+5. Get Octool by following the guide here: https://github.com/opencog/ocpkg
+6. ./octool -rdospicamgv -l default -l java
 
 
-## Build and install MOSES
+## Update PYTHONPATH
 
-1. cd moses
-2. mkdir build
-3. cd build
-4. Add the following to your ~/.bash_profile:
+1. Add the following to your ~/.bash_profile
 ```
 export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python:~/src/moses/build/moses/cython:~/moses/build/moses/cython
 ```
-5. source ~/.bash_profile
-6. cmake -DCMAKE_BUILD_TYPE=Release ..
-7. make
-8. make test
-
-### if all tests pass:
-9. sudo make install
-
-## Get, build and install Link-Grammar
-
-1. See https://github.com/opencog/link-grammar and get the tarball or git clone
-2. ./configure
-3. make
-4. make check
-
-### if all tests pass:
-5. sudo su
-6. make install
-7. ldconfig
-8. exit
-9. make installcheck
 
 ## Initialize PostgreSQL database
 
@@ -182,20 +128,6 @@ INSERT 0 1
 ```
 NOTE: Also check that all tables in both databases are owned by their intended users by using \l
 
-
-## Build and install Atomspace
-
-1. cd atomspace
-2. mkdir build
-3. cd build
-4. cmake ..
-5. make
-6. make test
-
-### NOTE: the following tests will fail: PutLinkUTest
-
-7. sudo make install
-
 ## Build and install OpenCog
 
 1. cd opencog
@@ -205,5 +137,5 @@ NOTE: Also check that all tables in both databases are owned by their intended u
 5. make
 6. make test
 
-### if all tests pass:
+### Some tests will fail:
 7. sudo make install
