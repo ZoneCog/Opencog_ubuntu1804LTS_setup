@@ -33,7 +33,7 @@ Building OpenCog is a moving target. As of 8th of May 2018, these instructions w
 
 ## Install dependencies (Contains extras for making chat related stuff work)
 
-1. sudo apt-get install gcc g++ make cmake libboost-all-dev cython python-nose python3-nose python-pytest python3-pytest postgresql postgresql-contrib postgresql-client guile-2.2-dev libtbb-dev libgearman-dev libpq-dev python-pip libblas-dev liblapack-dev uuid-dev doxygen libiberty-dev binutils-dev valgrind postgresql postgresql-client postgresql-contrib libpq-dev liblogging-stdlog0 liblogger-syslog-perl libzmq3-dev libprotobuf-dev libgtk-3-dev default-jdk python-cffi libffi-dev irssi irssi-scripts ca-certificates libcrypt-blowfish-perl libcrypt-dh-perl libcrypt-openssl-bignum-perl libmath-bigint-gmp-perl
+1. sudo apt-get install gcc g++ make cmake libboost-all-dev cython python-nose python3-nose python-pytest python3-pytest postgresql postgresql-contrib postgresql-client guile-2.2-dev libtbb-dev libgearman-dev libpq-dev python-pip libblas-dev liblapack-dev uuid-dev doxygen libiberty-dev binutils-dev valgrind postgresql postgresql-client postgresql-contrib libpq-dev liblogging-stdlog0 liblogger-syslog-perl libzmq3-dev libprotobuf-dev libgtk-3-dev default-jdk python-cffi libffi-dev irssi irssi-scripts ca-certificates libcrypt-blowfish-perl libcrypt-dh-perl libcrypt-openssl-bignum-perl libmath-bigint-gmp-perl rlwrap
 
 2. Read what apt-get says, if it tells to update then run `sudo apt-get update` and re-run step 1.
 3. sudo pip install -U setuptools
@@ -54,15 +54,6 @@ export PYTHONPATH=$PYTHONPATH:/usr/local/share/moses/python/:/usr//local/lib/pyt
 2. source ~/.bash_profile
 
 NOTE: You need to check where atomspace actually is. You can do it by running `find /usr |grep opencog |grep python`
-
-## Update Guile paths
-
-1. Add the following to ~/.guile
-
-```
-(add-to-load-path "/usr/local/share/opencog/scm")
-(add-to-load-path ".")
-```
 
 ## Initialize PostgreSQL database
 
@@ -171,6 +162,18 @@ NOTE: Also check that all tables in both databases are owned by their intended u
 1. git clone https://github.com/opencog/relex
 2. cd relex
 3. install-scripts/install-ubuntu-dependencies.sh
+
+## Update Guile paths
+
+1. Add the following to ~/.guile
+
+```
+(add-to-load-path "/usr/local/share/opencog/scm")
+(add-to-load-path ".")
+(use-modules (ice-9 readline))
+(activate-readline)
+(use-modules (opencog))
+```
 
 ## How to run e.g. chatbot
 
