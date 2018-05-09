@@ -31,10 +31,11 @@ Building OpenCog is a moving target. As of 8th of May 2018, these instructions w
 4. VBoxManage ubuntu_something.vdi --resize 51200 (50 GB)
 5. Go to VirtualBox, unmount and delete the old .vmdk and mount the newly created .vdi.
 
-## Install dependencies
+## Install dependencies (Contains extras for making chat related stuff work)
 
-1. sudo apt-get install gcc g++ make cmake libboost-all-dev cython python-nose python3-nose python-pytest python3-pytest postgresql postgresql-contrib postgresql-client guile-2.2-dev libtbb-dev libgearman-dev libpq-dev python-pip libblas-dev liblapack-dev uuid-dev doxygen libiberty-dev binutils-dev valgrind postgresql postgresql-client postgresql-contrib libpq-dev liblogging-stdlog0 liblogger-syslog-perl libzmq3-dev libprotobuf-dev libgtk-3-dev default-jdk python-cffi libffi-dev
-2. sudo apt-get update
+1. sudo apt-get install gcc g++ make cmake libboost-all-dev cython python-nose python3-nose python-pytest python3-pytest postgresql postgresql-contrib postgresql-client guile-2.2-dev libtbb-dev libgearman-dev libpq-dev python-pip libblas-dev liblapack-dev uuid-dev doxygen libiberty-dev binutils-dev valgrind postgresql postgresql-client postgresql-contrib libpq-dev liblogging-stdlog0 liblogger-syslog-perl libzmq3-dev libprotobuf-dev libgtk-3-dev default-jdk python-cffi libffi-dev irssi irssi-scripts ca-certificates libcrypt-blowfish-perl libcrypt-dh-perl libcrypt-openssl-bignum-perl libmath-bigint-gmp-perl
+
+2. Read what apt-get says, if it tells to update then run `sudo apt-get update` and re-run step 1.
 3. sudo pip install -U setuptools
 4. sudo easy_install cython nose
 5. sudo ln -s /usr/share/i18n/SUPPORTED /var/lib/locales/supported.d/all
